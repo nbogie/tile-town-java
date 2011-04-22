@@ -1,0 +1,45 @@
+Design decisions
+
+Why use the terrain map?
+(The terrain map is a 10x10 grid accompanying each tile, describing the position of features on the tile)
+ * It will be necessary when we try to allow the user to drag a meeple onto the tile.  Without it, we won't know which feature they want to place the tile on (not with simple drag and drop).  (though one could perhaps guess based on quantising the position to edge and looking at what is on that edge (here, edge is not sufficient detail (road runs through farm on an edge - 3 meeple-suitable sections therefore exist on that edge alone).
+ * It can be used to figure out which roads connect and which terminate within a tile.
+ * It can be used to highlight features on a tile (e.g. used as a mask to temporarily adjust brightness of a feature to be highlit) 
+    
+ What are the limitations of the terrain map implementation?
+ * It won't currently support a tile having crossing, non-touching non-terminating roads (e.g. 2 roads using a flyover / underpass).  One could use a second terrain value for the presence of another road (e.g. 1 for road A, 2 for road B, and 3 for where roads A and road B cross over)
+ * It will flood fill the roads to diagonals, so if two roads on a tile aren't meant to touch, they shouldn't be drawn in the terrain map occupying diagonally adjacent squares.
+ 
+ 
+Flood-filling cities:
+The following two are marked the same apart from their terrain details.  Yet #9 has one city and #14 has two cities: 
+ basic/bg009.png
+1111111111
+1111111133
+1111111333
+1111133333
+1111333333
+1113333333
+1113333333
+1113333333
+1133333333
+1333333333
+
+basic/bg014.png
+1111111111
+1111111133
+1311113333
+1333333333
+1133333333
+1133333333
+1333333333
+1333333333
+1333333333
+1333333333
+ 
+ Flood filling #14 see the intended-discrete city areas joined into one.
+ Idea: we could flood fill only the inner 8x8 square of the terrain detail, leaving a 1 border each side.  If the flood fill reaches any edge of the 8x8, we assume it has also reached the edge of the 10x10 (and therefor the tile has a connection of type city on that edge).  No, this is still not good enough, the north city in #14 extends to the west.  We'd have to ignore cells in the corner even of the 8x8.
+ Alternative: flood fill the city through the 10x10 but don't fill through the 2x2 corners.  If the north city in #14 still flood-fills to the west edge of the 10x10 then it really is connected there.  But it will never reach an edge through only a 2x2 corner.  No legitimate single cities extend so thinly across a 2x2 corner.     
+ 
+ 
+ 

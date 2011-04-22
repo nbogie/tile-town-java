@@ -1,0 +1,15 @@
+//TODO: discard picked tile if it cannot be played anywhere on the board in any rotation.
+//TODO: deal with bigger boards - scrolling or zooming
+//TODO: expansions
+//TODO: limit meeples available to each player
+//TODO: have game truly finish and show scoring.
+//TODO: improve meeple selection ui
+//TODO: inspect mode shows number of meeples on each feature during hover. Perhaps Highlights it, too.
+//TODO: better meeple graphics
+//TODO: make multiplayer
+//TODO: check it works as an applet
+//TODO: make an AI (study atlantis code?)
+//TODO: add sound (minimal)
+//TODO: add tile debugging tool (shows computed features on any tile)
+//TODO: implement game variants
+//IDEA: show probabilities

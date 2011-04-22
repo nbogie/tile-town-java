@@ -1,0 +1,6 @@
+Multiplayer:
+ 
+ information that needs to be passed around:
+ place tile: tile number (type), position, rotation.
+ place meeple (tile, in-tile position)
+ 

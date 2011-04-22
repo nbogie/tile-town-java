@@ -1,0 +1,8 @@
+*.class
+*.swp
+private
+screenshots/private
+tileset
+resources/**/*.png
+bin
+lib/*.jar
